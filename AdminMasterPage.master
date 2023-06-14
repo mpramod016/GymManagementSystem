@@ -1,0 +1,221 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminMasterPage.master.cs" Inherits="Admin_AdminMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Gym Management System</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../assets/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../assets/vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../assets/vendors/jvectormap/jquery-jvectormap.css">
+    <!-- End Plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../assets/css/shared/style.css">
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../assets/css/demo_1/style.css">
+    <!-- End Layout styles -->
+    <link rel="shortcut icon" href="../assets/images/favicon.png" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div class="container-scroller">
+                <!-- partial:partials/_navbar.html -->
+                <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+                    <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+                        <a class="navbar-brand brand-logo" href="Admin.aspx">Admin Panel</a>
+                    </div>
+                    <div class="navbar-menu-wrapper d-flex align-items-center">
+                        <h4 class="page-title">Gym Management System</h4>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown d-none d-xl-inline-block user-dropdown">
+                                <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                    <asp:Repeater ID="Repeater3" runat="server">
+                                            <ItemTemplate>
+                                                <img src='data:<%#Eval("ContentType")%>;base64,<%# Eval("UImage") != System.DBNull.Value ? Convert.ToBase64String((byte[])Eval("UImage")) : string.Empty %>' class="avatar-img rounded" alt="User UImage">
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                                    <div class="dropdown-header text-center">
+                                         <asp:Repeater ID="Repeater2" runat="server">
+                                            <ItemTemplate>
+                                                <img src='data:<%#Eval("ContentType")%>;base64,<%# Eval("UImage") != System.DBNull.Value ? Convert.ToBase64String((byte[])Eval("UImage")) : string.Empty %>' class="avatar-img rounded" alt="User UImage">
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                        <p class="mb-1 mt-3 font-weight-semibold"><asp:Label ID="lblUserName" runat="server" Text=""></asp:Label></p>
+                                        <p class="font-weight-light text-muted mb-0"><asp:Label ID="lblMail" runat="server" Text=""></asp:Label></p>
+                                    </div>
+                                    <a class="dropdown-item" href="MyProfile.aspx"><i class="dropdown-item-icon mdi mdi-account-outline text-primary"></i>My Profile</a>
+                                    <a class="dropdown-item" href="../../User/SignIn.aspx"><i class="dropdown-item-icon mdi mdi-power text-primary"></i>Sign Out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- partial -->
+                <div class="container-fluid page-body-wrapper">
+                    <!-- partial:partials/_settings-panel.html -->
+
+
+                    <!-- partial -->
+                    <!-- partial:partials/_sidebar.html -->
+                    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                        <ul class="nav">
+                            <li class="nav-item nav-profile">
+                                <a href="#" class="nav-link">
+                                    <div class="profile-image">
+                                        <asp:Repeater ID="Repeater1" runat="server">
+                                            <ItemTemplate>
+                                                <img src='data:<%#Eval("ContentType")%>;base64,<%# Eval("UImage") != System.DBNull.Value ? Convert.ToBase64String((byte[])Eval("UImage")) : string.Empty %>' class="avatar-img rounded" alt="User UImage">
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                        <div class="dot-indicator bg-success"></div>
+                                    </div>
+                                    <div class="text-wrapper">
+                                        <p class="profile-name"><asp:Label ID="lblUserName1" runat="server" Text=""></asp:Label></p>
+                                        <p class="designation"><asp:Label ID="lblMail1" runat="server" Text=""></asp:Label></p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="nav-item nav-category">Main Menu</li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Admin.aspx">
+                                    <i class="menu-icon typcn typcn-document-text"></i>
+                                    <span class="menu-title">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#apps-dropdown" aria-expanded="false" aria-controls="apps-dropdown">
+                                    <i class="menu-icon typcn typcn-arrow-maximise"></i>
+                                    <span class="menu-title">Trainer</span>
+
+                                </a>
+                                <div class="collapse" id="apps-dropdown">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="Trainer.aspx">Add Trainer</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="ViewTrainer.aspx">View Trainer</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#sidebar-layouts" aria-expanded="false" aria-controls="sidebar-layouts">
+                                    <i class="menu-icon typcn typcn-calendar-outline"></i>
+                                    <span class="menu-title">Equipemt</span>
+
+                                </a>
+                                <div class="collapse" id="sidebar-layouts">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="Equipment.aspx">Add Equipemt</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="ViewEquipment.aspx">View Equipemt</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                                    <i class="menu-icon typcn typcn-coffee"></i>
+                                    <span class="menu-title">Package</span>
+
+                                </a>
+                                <div class="collapse" id="ui-basic">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="Package.aspx">Add Package</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="ViewPackage.aspx">View Package</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+                                    <i class="menu-icon typcn typcn-coffee"></i>
+                                    <span class="menu-title">User</span>
+
+                                </a>
+                                <div class="collapse" id="ui-basic1">
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="User.aspx">Add User</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="ViewUser.aspx">View User</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="Order.aspx">
+                                    <i class="menu-icon typcn typcn-document-text"></i>
+                                    <span class="menu-title">Order</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../User/SignIn.aspx">
+                                    <i class="menu-icon typcn typcn-book"></i>
+                                    <span class="menu-title">Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- partial -->
+
+                    <div class="main-panel">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                        <footer class="footer">
+                            <div class="container-fluid clearfix">
+                                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Develope By © 2020 <a href="#" target="_blank">Tejas</a>. All rights reserved.</span>
+                                </span>
+                            </div>
+                        </footer>
+                        <!-- partial -->
+                    </div>
+
+                    <!-- main-panel ends -->
+                </div>
+                <!-- page-body-wrapper ends -->
+            </div>
+
+        </div>
+    </form>
+    <script src="../assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="../assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="../assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../assets/vendors/justgage/raphael-2.1.4.min.js"></script>
+    <script src="../assets/vendors/justgage/justgage.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../assets/js/shared/off-canvas.js"></script>
+    <script src="../assets/js/shared/hoverable-collapse.js"></script>
+    <script src="../assets/js/shared/misc.js"></script>
+    <script src="../assets/js/shared/settings.js"></script>
+    <script src="../assets/js/shared/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="../assets/js/demo_1/dashboard.js"></script>
+</body>
+</html>
